@@ -1,15 +1,17 @@
 # frozen_string_literal: true
-
-RSpec.describe Testlance::Answer::Parser do
+#
+RSpec.describe TestlanceParser::Executor do
   let(:script) {
-    "a = 1
+    "
+     a = 1
      b = 2
      c = a + b
+
      return c
     "
   }
 
-  let(:tconfig) { "q: 1; f: #{script};" }
+  let(:script_result) {3}
 
   let(:data) {
     {
@@ -21,7 +23,12 @@ RSpec.describe Testlance::Answer::Parser do
 
   let(:lua) { TestlanceParser::Executor.new(data) }
 
-  it "perform script" do
-    p lua.perform(tconfig)
+  context "when successful" do
+
+    it "perform script" do
+      res = lua.run(script)
+
+      expect(res).to eq script_result
+    end
   end
 end

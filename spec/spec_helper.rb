@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "testlance-parser/configurator"
 require "testlance-parser/executor"
 
 RSpec.configure do |config|
