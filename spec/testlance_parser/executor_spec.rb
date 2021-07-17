@@ -1,18 +1,7 @@
 # frozen_string_literal: true
-#
+require 'objspace'
+
 RSpec.describe TestlanceParser::Executor do
-  let(:script) {
-    "
-     a = 1
-     b = 2
-     c = a + b
-
-     return c
-    "
-  }
-
-  let(:script_result) {3}
-
   let(:data) {
     {
         title: 'title',
@@ -24,11 +13,17 @@ RSpec.describe TestlanceParser::Executor do
   let(:lua) { TestlanceParser::Executor.new(data) }
 
   context "when successful" do
+    it "simple" do
+      result = lua.run read_lua_script 'simple'
 
-    it "perform script" do
-      res = lua.run(script)
+      expect(result).to eq 3
+    end
 
-      expect(res).to eq script_result
+    it "date_time" do
+      result = lua.run read_lua_script 'date_time'
+
+      expect(result['date']).to match /\d{4}-\d{2}-\d{2}/
+      expect(result['time']).to match /\d{2}:\d{2}:\d{2}/
     end
   end
 end
