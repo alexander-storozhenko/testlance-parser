@@ -1,4 +1,4 @@
-require 'objspace'
+require 'timeout'
 require 'rufus-lua'
 require_relative 'lua_initializer'
 
@@ -8,9 +8,9 @@ module TestlanceParser
 
     attr_reader :data
 
-    SCRIPT_SIZE_LIMIT = 1024.freeze
-    SCRIPT_CLEAR_SIZE_LIMIT = 512.freeze
-    MEMORY_USAGE_LIMIT = 100.freeze
+    SCRIPT_SIZE_LIMIT = 1024.freeze # count
+    SCRIPT_CLEAR_SIZE_LIMIT = 512.freeze # count
+    MEMORY_USAGE_LIMIT = 100.freeze # bytes
 
     LIBS = %w[math].freeze
 
@@ -29,11 +29,8 @@ module TestlanceParser
       self
     end
 
-    def run(lua_script)
+    def run!(lua_script)
       safe_run! lua_script
-
-    rescue => error
-      STDERR.puts "Error while executing: #{error}"
     end
 
     private
@@ -46,7 +43,7 @@ module TestlanceParser
         raise 'Script size is over the limit'
       end
 
-      result = @lua.eval(lua_script)
+      result = @lua.eval lua_script
 
       if @lua.gc_count > MEMORY_USAGE_LIMIT
         raise 'Memory usage is over the limit'

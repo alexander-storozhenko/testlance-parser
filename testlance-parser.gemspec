@@ -3,12 +3,12 @@
 require_relative "lib/testlance-parser/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "testlance-answer-parser"
+  spec.name          = "testlance-parser"
   spec.version       = Testlance::Answer::Parser::VERSION
   spec.authors       = ["storozhenkoalex"]
   spec.email         = ["storozhenkoalex@yandex.ru"]
 
-  spec.summary        = "answer parser for testlance-app"
+  spec.summary       = "answer parser for testlance-app"
   spec.description   = "parser for custom logic of test"
   spec.license       = "MIT"
   spec.required_ruby_version = ">= 2.4.0"

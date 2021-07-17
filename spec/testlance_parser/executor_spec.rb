@@ -14,16 +14,22 @@ RSpec.describe TestlanceParser::Executor do
 
   context "when successful" do
     it "simple" do
-      result = lua.run read_lua_script 'simple'
+      result = lua.run! read_lua_script 'simple'
 
       expect(result).to eq 3
     end
 
     it "date_time" do
-      result = lua.run read_lua_script 'date_time'
+      result = lua.run! read_lua_script 'date_time'
 
       expect(result['date']).to match /\d{4}-\d{2}-\d{2}/
       expect(result['time']).to match /\d{2}:\d{2}:\d{2}/
+    end
+  end
+
+  context "with error" do
+    it 'memory usage' do
+      expect { lua.run! read_lua_script 'memory_usage' }.to raise_error
     end
   end
 end

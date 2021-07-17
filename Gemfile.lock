@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    testlance-answer-parser (0.1.0)
+    testlance-parser (0.2.0)
 
 GEM
   remote: https://rubygems.org/
@@ -32,7 +32,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rspec (~> 3.0)
   rufus-lua
-  testlance-answer-parser!
+  testlance-parser!
 
 BUNDLED WITH
    2.2.21
