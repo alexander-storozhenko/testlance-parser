@@ -1,16 +1,13 @@
 # frozen_string_literal: true
-require 'objspace'
 
 RSpec.describe TestlanceParser::Executor do
   let(:data) {
     {
-        title: 'title',
-        description: 'description',
-        rights: 'public',
+        G_TITLE: 'G_TITLE',
     }
   }
 
-  let(:lua) { TestlanceParser::Executor.new(data) }
+  let(:lua) { described_class.new(data) }
 
   context "when successful" do
     it "simple" do
@@ -29,7 +26,16 @@ RSpec.describe TestlanceParser::Executor do
 
   context "with error" do
     it 'memory usage' do
-      expect { lua.run! read_lua_script 'memory_usage' }.to raise_error
+      expect { lua.run! read_lua_script 'memory_usage' }.to raise_error TestlanceParser::MemoryLimitError
+    end
+
+    it 'script size' do
+      expect { lua.run! read_lua_script 'big_size_script' }.to raise_error TestlanceParser::ScriptSizeLimitError
+    end
+
+
+    it 'change global constant' do
+      expect { lua.run! read_lua_script 'change_constant'}.to raise_error Rufus::Lua::LuaError
     end
   end
 end

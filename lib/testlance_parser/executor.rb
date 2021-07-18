@@ -1,10 +1,12 @@
 require 'timeout'
 require 'rufus-lua'
 require_relative 'lua_initializer'
+require_relative 'lua_helper'
+require_relative 'errors'
 
 module TestlanceParser
   class Executor
-    include LuaInitializer
+    include LuaHelper
 
     attr_reader :data
 
@@ -12,19 +14,17 @@ module TestlanceParser
     SCRIPT_CLEAR_SIZE_LIMIT = 512.freeze # count
     MEMORY_USAGE_LIMIT = 100.freeze # bytes
 
-    LIBS = %w[math].freeze
+    LIBS = %w[base math]
 
     def initialize(data = {})
       @data = data
       @lua = Rufus::Lua::State.new(LIBS)
-
-      initialize_global_variables
-      initialize_global_functions
+      @initializer = LuaInitializer.new(@lua, @data)
+      initialize_globals
     end
 
-    def reload(data = nil)
-      @data = data if data
-      @lua = Rufus::Lua::State.new(LIBS)
+    def reload(data = {})
+      initialize data
 
       self
     end
@@ -40,13 +40,13 @@ module TestlanceParser
       script_clear_size = lua_script.gsub(/\s/, '').length
 
       if script_size > SCRIPT_SIZE_LIMIT || script_clear_size > SCRIPT_CLEAR_SIZE_LIMIT
-        raise 'Script size is over the limit'
+        raise ScriptSizeLimitError
       end
 
       result = @lua.eval lua_script
 
       if @lua.gc_count > MEMORY_USAGE_LIMIT
-        raise 'Memory usage is over the limit'
+        raise MemoryLimitError
       end
 
       @lua.gc_collect!
@@ -54,12 +54,14 @@ module TestlanceParser
       result
     end
 
-    def initialize_global_variables
-      @data.each { |var_name, value| @lua.eval("#{var_name} = '#{value}'") }
+    def create_constants_protect
+      @lua.eval read_lua_script 'globals_protect'
     end
 
-    def initialize_global_functions
-      initialize_lua_functions @lua
+    def initialize_globals
+      @initializer.initialize_global_constants
+
+      create_constants_protect
     end
   end
 end

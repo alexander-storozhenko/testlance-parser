@@ -1,7 +1,8 @@
 PATH
   remote: .
   specs:
-    testlance-parser (0.2.0)
+    testlance_parser (0.2.0)
+      rufus-lua
 
 GEM
   remote: https://rubygems.org/

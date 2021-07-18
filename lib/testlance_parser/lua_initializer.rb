@@ -1,15 +1,30 @@
 require 'date'
 
 module TestlanceParser
-  module LuaInitializer
-    def initialize_lua_functions(state)
-      @lua = state
+  class LuaInitializer
+    CONSTANTS_TABLE = '__constants'.freeze
 
-      time_function
-      date_function
+    def initialize(state, data)
+      @lua = state
+      @data = data
+    end
+
+    def initialize_global_constants
+      initialize_constants
+      initialize_functions
     end
 
     private
+
+    def initialize_constants
+      constants = @data.map { |var_name, value| "#{var_name} = '#{value}'" }.join(',')
+      @lua.eval "#{CONSTANTS_TABLE} = {#{constants}}"
+    end
+
+    def initialize_functions
+      time_function
+      date_function
+    end
 
     def date_function
       @lua.function :G_DATE_NOW do
