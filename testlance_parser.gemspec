@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.files       = %w(lib/testlance_parser.rb)
 
   # Uncomment to register a new dependency of your gem
-  spec.add_dependency "rufus-lua", "~> 1.0"
+  spec.add_dependency "rufus-lua"
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
