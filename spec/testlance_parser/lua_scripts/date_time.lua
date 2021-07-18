@@ -8,4 +8,8 @@ function time()
     return G_TIME_NOW()
 end
 
-return { date = date(), time = time() }
+function time_with_zone()
+    return G_TIME_NOW(true)
+end
+
+return { date = date(), time = time(), time_with_zone = time_with_zone() }
