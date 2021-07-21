@@ -1,0 +1,29 @@
+name: rspec
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      RAILS_ENV: test
+      GEMFILE_RUBY_VERSION: 2.6.5
+      TZ: "Europe/Warsaw"
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set LUA
+        run: |
+          sudo apt-get install liblua5.1-0
+          
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.5
+          bundler-cache: true
+          
+      - name: Run tests
+        run: |
+          bundle exec rspec --color
