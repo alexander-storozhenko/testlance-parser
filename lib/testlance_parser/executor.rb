@@ -20,6 +20,7 @@ module TestlanceParser
       @data = data
       @lua = Rufus::Lua::State.new(LIBS)
       @initializer = LuaInitializer.new(@lua, @data)
+
       initialize_globals
     end
 
