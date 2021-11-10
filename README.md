@@ -1,17 +1,5 @@
 
 # Readme
-# Abilities
-## Usual status: 
-
-* memory_usage - **100** bytes
-* script_size - **1024** symbols
-* performance_time - **1** seconds
-
-## King status: 
-* memory_usage - **300** bytes
-* script_size - **3072** symbols
-* performance_time - **1** seconds
-
 # API
 ## Global variables
 
