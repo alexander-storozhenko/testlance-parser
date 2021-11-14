@@ -1,4 +1,5 @@
 require 'date'
+require 'time'
 
 module TestlanceParser
   class LuaInitializer
@@ -26,13 +27,13 @@ module TestlanceParser
     end
 
     def date_function
-      @lua.function :G_DATE_NOW do
+      @lua.function :g_date_now do
         Time.now.strftime("%y/%m/%d")
       end
     end
 
     def time_function
-      @lua.function :G_TIME_NOW do |time_zone|
+      @lua.function :g_time_now do |time_zone|
         time_zone ? Time.now.strftime("%H:%M:%S%Z") : Time.now.strftime("%H:%M:%S")
       end
     end
@@ -42,6 +43,18 @@ module TestlanceParser
         l_date, r_date = Date.parse(l_value), Date.parse(r_value)
 
         if l_date > r_date then -1 elsif l_date < r_date then 1 else 0 end
+      rescue => e
+        e.msg
+      end
+    end
+
+    def time_compare_helper_function
+      @lua.function :compare_times do |l_value, r_value|
+        l_time, r_time = Time.parse(l_value), Time.parse(r_value)
+
+        if l_time > r_time then -1 elsif l_time < r_time then 1 else 0 end
+      rescue => e
+        e.msg
       end
     end
   end
