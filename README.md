@@ -41,12 +41,18 @@ return (table):
 ```lua
 {month = 'mm', day = 'dd', year = 'yy'}
 ```
-- `compare_dates(date_1, date_2)` # compare 2 dates. 
+- `compare_dates(date_1, date_2)` # compare 2 dates. Format: "mm/dd/yy"
 return (integer):
    - `-1` if left more than right
    - `1` if right more than left
    - `0` if right equals left
 <br/>
+
+- `compare_times(date_1, date_2)` # compare 2 times. Format: "hh:mm:ss"
+return (integer):
+   - `-1` if left more than right
+   - `1` if right more than left
+   - `0` if right equals left
 
 ![testlance-logo-title](https://user-images.githubusercontent.com/54493133/126072356-d1b6749d-8320-44c9-9b94-4e8fe4ede9c8.png)
 
