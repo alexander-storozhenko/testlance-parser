@@ -23,8 +23,22 @@ RSpec.describe TestlanceParser::Executor do
       expect(result['time']).to match /\d{2}:\d{2}:\d{2}/
     end
 
+    it "date_time" do
+      result = lua.run! read_lua_script 'date_time'
+
+      expect(result['date']).to match /\d{2}\/\d{2}\/\d{2}/
+      expect(result['time']).to match /\d{2}:\d{2}:\d{2}/
+    end
+
+
     it "compare dates" do
       result = lua.run! read_lua_script 'compare_dates'
+
+      expect(result).to eq -1.0
+    end
+
+    it "compare times" do
+      result = lua.run! read_lua_script 'compare_times'
 
       expect(result).to eq -1.0
     end

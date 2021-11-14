@@ -1,15 +1,15 @@
 -- date time functions for spec
 
 function date()
-    return G_DATE_NOW()
+    return g_date_now()
 end
 
 function time()
-    return G_TIME_NOW()
+    return g_time_now()
 end
 
 function time_with_zone()
-    return G_TIME_NOW(true)
+    return g_time_now(true)
 end
 
 return { date = date(), time = time(), time_with_zone = time_with_zone() }

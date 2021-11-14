@@ -1,6 +1,6 @@
 -- compare two dates with helper function
 
-local date_now = G_DATE_NOW()
+local date_now = g_date_now()
 local other_date = '11/12/08'
 
 -- lvalue > rvalue
