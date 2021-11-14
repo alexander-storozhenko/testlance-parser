@@ -36,17 +36,12 @@ format (string):
 'hh:mm:ss'
 ```
 ## Helper functions
-- `to_date(string)` # from string to table.
-return (table):
-```lua
-{month = 'mm', day = 'dd', year = 'yy'}
-```
+
 - `compare_dates(date_1, date_2)` # compare 2 dates. Format: "mm/dd/yy"
 return (integer):
    - `-1` if left more than right
    - `1` if right more than left
    - `0` if right equals left
-<br/>
 
 - `compare_times(date_1, date_2)` # compare 2 times. Format: "hh:mm:ss"
 return (integer):
