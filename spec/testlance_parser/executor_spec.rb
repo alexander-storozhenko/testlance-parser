@@ -3,7 +3,8 @@
 RSpec.describe TestlanceParser::Executor do
   let(:data) {
     {
-        G_TITLE: 'G_TITLE',
+        G_TITLE: 'CUSTOM QUESTION TITLE',
+        G_CUSTOM: 'G_CUSTOM',
     }
   }
 
@@ -55,6 +56,14 @@ RSpec.describe TestlanceParser::Executor do
 
     it 'change global constant' do
       expect { lua.run! read_lua_script 'change_constant'}.to raise_error Rufus::Lua::LuaError
+    end
+  end
+
+
+  context 'when user code' do
+    it 'depends_on_title_points' do
+      result = lua.run! read_lua_script 'user_code/depends_on_title_points'
+      expect(result).to eq 0.5
     end
   end
 end

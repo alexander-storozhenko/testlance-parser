@@ -55,14 +55,14 @@ module TestlanceParser
       result
     end
 
-    def create_constants_protect
+    def init_constants_protect
       @lua.eval read_lua_script 'globals_protect'
+      yield
+      @lua.eval @data.map { |var_name, _| "protect(\"#{var_name}\")" }.join("\n")
     end
 
     def initialize_globals
-      @initializer.initialize_global_constants
-
-      create_constants_protect
+      init_constants_protect{ @initializer.initialize_global_constants }
     end
   end
 end
