@@ -3,8 +3,8 @@
 RSpec.describe TestlanceParser::Executor do
   let(:data) {
     {
-        G_TITLE: 'CUSTOM QUESTION TITLE',
-        G_CUSTOM: 'G_CUSTOM',
+      G_TITLE: 'CUSTOM QUESTION TITLE',
+      G_CUSTOM: 'G_CUSTOM',
     }
   }
 
@@ -31,7 +31,6 @@ RSpec.describe TestlanceParser::Executor do
       expect(result['time']).to match /\d{2}:\d{2}:\d{2}/
     end
 
-
     it "compare dates" do
       result = lua.run! read_lua_script 'compare_dates'
 
@@ -55,15 +54,28 @@ RSpec.describe TestlanceParser::Executor do
     end
 
     it 'change global constant' do
-      expect { lua.run! read_lua_script 'change_constant'}.to raise_error Rufus::Lua::LuaError
+      expect { lua.run! read_lua_script 'change_constant' }.to raise_error Rufus::Lua::LuaError
     end
   end
-
 
   context 'when user code' do
     it 'depends_on_title_points' do
       result = lua.run! read_lua_script 'user_code/depends_on_title_points'
       expect(result).to eq 0.5
+    end
+  end
+
+  context 'utils' do
+    context 'string' do
+      it 'split' do
+        result = lua.run! read_lua_script 'split_string'
+        expect(result.to_h.values).to eq(%w[test string])
+      end
+
+      it 'join' do
+        result = lua.run! read_lua_script 'join_string'
+        expect(result).to eq('test,string')
+      end
     end
   end
 end
