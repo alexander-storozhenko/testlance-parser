@@ -3,6 +3,8 @@ module TestlanceParser
     module String
       def string_split_function
         @lua.function :string_split do |string, template|
+          raise LuaInnerFunctionError, 'input value must be String' unless string.class == String
+
           string.split(template)
         end
       end
