@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "testlance_parser/executor"
-require "testlance_parser/errors"
+require "testlance_script/executor"
+require "testlance_script/errors"
 require_relative "lua_helper"
 
 RSpec.configure do |config|

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe TestlanceParser::Executor do
+RSpec.describe Testlance::Script::Executor do
   let(:data) {
     {
       G_TITLE: 'CUSTOM QUESTION TITLE',
@@ -46,11 +46,11 @@ RSpec.describe TestlanceParser::Executor do
 
   context "with error" do
     it 'memory usage' do
-      expect { lua.run! read_lua_script 'memory_usage' }.to raise_error TestlanceParser::MemoryLimitError
+      expect { lua.run! read_lua_script 'memory_usage' }.to raise_error Testlance::Script::MemoryLimitError
     end
 
     it 'script size' do
-      expect { lua.run! read_lua_script 'big_size_script' }.to raise_error TestlanceParser::ScriptSizeLimitError
+      expect { lua.run! read_lua_script 'big_size_script' }.to raise_error Testlance::Script::ScriptSizeLimitError
     end
 
     it 'change global constant' do
