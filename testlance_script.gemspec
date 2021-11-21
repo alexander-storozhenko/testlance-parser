@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/testlance_parser/version"
+require_relative "lib/testlance_script/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "testlance_parser"
-  spec.version       = TestlanceParser::VERSION
+  spec.name          = "testlance_script"
+  spec.version       = Testlance::Script::VERSION
   spec.authors       = ["storozhenkoalex"]
   spec.email         = ["storozhenkoalex@yandex.ru"]
 

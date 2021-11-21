@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    testlance_parser (0.2.0)
+    testlance_script (0.2.0)
       rufus-lua
 
 GEM
@@ -34,7 +34,7 @@ DEPENDENCIES
   rake (~> 13.0)
   rspec (~> 3.0)
   rufus-lua
-  testlance_parser!
+  testlance_script!
 
 BUNDLED WITH
-   2.2.21
+   2.2.27
