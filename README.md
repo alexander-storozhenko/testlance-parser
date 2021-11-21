@@ -48,6 +48,8 @@ return (integer):
    - `-1` if left more than right
    - `1` if right more than left
    - `0` if right equals left
+- `string_split(string, template)` # split string by template, return (table)
+- `string_join(table, value)` # join string, return (string)
 
 ![testlance-logo-title](https://user-images.githubusercontent.com/54493133/126072356-d1b6749d-8320-44c9-9b94-4e8fe4ede9c8.png)
 
