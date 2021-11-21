@@ -42,6 +42,12 @@ RSpec.describe Testlance::Script::Executor do
 
       expect(result).to eq -1.0
     end
+
+    it "convert to string date" do
+      result = lua.run! read_lua_script 'to_date'
+
+      expect(result).to eq '2021/11/21'
+    end
   end
 
   context "with error" do
