@@ -3,34 +3,34 @@
 # API
 ## Global variables
 
-- `G_Q_TITLE` # question title
-- `G_DESCRIPTION` # question description
-- `G_USER_STATUS` # user status
-- `G_NEXT_Q` # next question number
-- `G_Q_TYPE` # question type
-- `G_TEST_TITLE` # test title
-- `G_ANSWERS` # answers
+- `Q_TITLE` # question title
+- `DESCRIPTION` # question description
+- `USER_STATUS` # user status
+- `NEXT_Q` # next question number
+- `Q_TYPE` # question type
+- `TEST_TITLE` # test title
+- `ANSWERS` # answers
 format (table):
 ```lua
 {1 = 'answer1', 2 = 'answer2'}
 ```
-- `G_TRUE_ANSWERS` # true answers
+- `TRUE_ANSWERS` # true answers
 format (table):
 ```lua
 {1 = 'true'}
 ```
-- `G_USER_ANSWERS` # user answers
+- `USER_ANSWERS` # user answers
 format (table):
 ```lua
 {1 = 'true'}
 ```
 ## Global functions
-- `g_date_now(time_zone = false)` # current date 
+- `date_now(time_zone = false)` # current date 
 format (string):
 ```lua
 'mm/dd/yy'
 ```
-- `g_time_now()` # current time 
+- `time_now()` # current time 
 format (string):
 ```lua
 'hh:mm:ss'
