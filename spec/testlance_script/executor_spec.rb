@@ -5,6 +5,7 @@ RSpec.describe Testlance::Script::Executor do
     {
       G_TITLE: {type: :string, value: 'CUSTOM QUESTION TITLE'},
       G_CUSTOM: {type: :string, value: 'G_CUSTOM'},
+      CUSTOM_TBL: {type: :table, value: {1 => 3}}
     }
   }
 
