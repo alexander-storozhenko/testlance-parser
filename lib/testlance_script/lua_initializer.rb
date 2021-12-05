@@ -20,7 +20,16 @@ module Testlance
       private
 
       def initialize_constants
-        @lua.eval @data.map { |var_name, value| "#{var_name} = '#{value}'" }.join("\n")
+        @lua.eval @data.map { |var_name, data| "#{var_name} = #{with_type(data[:type], data[:value])}" }.join("\n")
+      end
+
+      def with_type(type, value)
+        case type
+        when :table
+          "{#{value.map { |k, v| "#{k} = #{v}" }.join(',')}}"
+        else
+          "'#{value}'"
+        end
       end
 
       def initialize_functions

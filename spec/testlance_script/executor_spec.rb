@@ -3,8 +3,8 @@
 RSpec.describe Testlance::Script::Executor do
   let(:data) {
     {
-      G_TITLE: 'CUSTOM QUESTION TITLE',
-      G_CUSTOM: 'G_CUSTOM',
+      G_TITLE: {type: :string, value: 'CUSTOM QUESTION TITLE'},
+      G_CUSTOM: {type: :string, value: 'G_CUSTOM'},
     }
   }
 
