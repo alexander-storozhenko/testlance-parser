@@ -19,15 +19,9 @@ module Testlance
 
         def to_date_function
           @lua.function :to_date do |date_table|
-            date = {
-              year: Time.now.year,
-              month: Time.now.month,
-              day: Time.now.day,
-            }
+            date = date_table.to_h
 
-            date = date.merge(date_table.to_h)
-
-            "#{date[:year]}/#{date[:month]}/#{date[:day]}"
+            "#{date['year'].to_i}/#{date['month'].to_i}/#{date['day'].to_i}"
           end
         end
 
