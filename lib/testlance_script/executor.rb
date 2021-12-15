@@ -11,9 +11,9 @@ module Testlance
 
       attr_reader :data
 
-      SCRIPT_SIZE_LIMIT = 1024.freeze # count
-      SCRIPT_CLEAR_SIZE_LIMIT = 512.freeze # count
-      MEMORY_USAGE_LIMIT = 100.freeze # bytes
+      SCRIPT_SIZE_LIMIT       = 1024.freeze
+      SCRIPT_CLEAR_SIZE_LIMIT = 512.freeze
+      MEMORY_USAGE_LIMIT      = 100.freeze
 
       LIBS = %w[base math]
 
@@ -56,14 +56,14 @@ module Testlance
         result
       end
 
-      def init_constants_protect
-        @lua.eval read_lua_script 'globals_protect'
-        yield
-        @lua.eval @data.map { |var_name, _| "protect(\"#{var_name}\")" }.join("\n")
+      def initialize_globals
+        init_constants_protect
       end
 
-      def initialize_globals
-        init_constants_protect { @initializer.initialize_global_constants }
+      def init_constants_protect
+        @lua.eval read_lua_script 'globals_protect'
+        @initializer.initialize_global_constants
+        @lua.eval @data.map { |var_name, _| "protect(\"#{var_name}\")" }.join("\n")
       end
     end
   end
